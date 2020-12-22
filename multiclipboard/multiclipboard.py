@@ -18,7 +18,7 @@ class Multiclipboard ():
         self.__verify_path()
 
         self.db_file = os.path.dirname (__file__)
-        self.__mcbShelf = shelve.open(os.path.join(path, 'clipboard'))
+        self.__mcbShelf = shelve.open(os.path.join(path_db_file, 'clipboard'))
 
 
     def __verify_path (self):
@@ -37,17 +37,17 @@ class Multiclipboard ():
         
         if text == "": 
             self.__mcbShelf [str(keyword)] = pyperclip.paste()
-            print ('keyword {} saved with clipboard text'.format (keyword))
+            print ('keyword "{}" saved with clipboard text'.format (keyword))
         else: 
             self.__mcbShelf [str(keyword)] = str(text)
-            print ('keyword {} saved with specific text'.format (keyword))
+            print ('keyword "{}" saved with specific text'.format (keyword))
 
     def get_text (self, keyword): 
         """
         Return specific text with keyword
         """
 
-        text = pyperclip.copy(self.__mcbShelf[str(keyword)])
+        text = self.__mcbShelf[str(keyword)]
         return text
 
     def copy_text (self, keyword): 
@@ -56,20 +56,23 @@ class Multiclipboard ():
         """
 
         pyperclip.copy(self.__mcbShelf[str(keyword)])
-        print ('Text for the keyword {} copied'.format (keyword))
+        print ('Text for the keyword "{}" copied'.format (keyword))
 
     def delete_keyword (self, keyword): 
         """
         Delete specific keywords and the keyword text
         """
 
-        if keyword in self.__mcbShelf: 
-            del self.__mcbShelf[keyword]
-            print ('keyword {} deleted'.format (keyword))
+        if str(keyword) in self.__mcbShelf: 
+            del self.__mcbShelf[str(keyword)]
+            print ('keyword "{}" deleted'.format (keyword))
         else: 
             print ("keyword dooesn't exist")
 
     def delete_all (self): 
+        """
+        Delete all keywords from the file
+        """
 
         for item in self.__mcbShelf.keys():
             del self.__mcbShelf[item]
@@ -78,6 +81,11 @@ class Multiclipboard ():
 
 
     def list_keywords (self): 
+        """ 
+        Print all keywords from the file
+        """
+
+        print ("\nKeywords: \n")
         for keyword in list(self.__mcbShelf.keys()): 
             print (keyword)
 

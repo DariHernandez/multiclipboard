@@ -1,30 +1,47 @@
-# multiclipboard
-Basic terminal program to saves and loads pices of text to the clipboard
+# Multiclipboard
+
+Class to saves and loads pices of text to the clipboard, via a database in a DB file
+
+## Install
+
+``` bash
+$ 
+```
+
 ## How to use
-Run the program by terminal
 
-**$ python3 main.py save "keyword"** # Saves clipboard to keyword
+``` bash
+# Import pakage
+from multiclipboard import multiclipboard
 
-**$ python3 main.py "keyword"** # Loads keyword to clipboard
+# Folder to save the .db file
+bd_file = "c:\\user\\my_files"
 
-**$ python3 main.py list** # Loads all keywords to clipboard and print by terminal
+# Make an intance reading the clipboard
+my_multiclipboard = multiclipboard.Multiclipboard(bd_file)
 
-**$ python3 main.py del "keyword"** # Delete specific keyword
 
-**$ python3 main.py del** # Delete all keywords
+# Save text from clipboard to the database, and associate this text with a keyword
+my_multiclipboard.save_text ("key4")
 
-# multiclipboard (ESPAÑOL)
-Programa básico de terminal paras guardar y cargas piezas de texto al portapapeles
-## How to use
-Ejecute el programa desde la terminal.
+# Save specific text  clipboard to the database, and associate this text with a keyword
+my_multiclipboard.save_text ("key2", text="Example text to save")
 
-**$ python3 main.py save "keyword"** # Guardar el postapapeles como una palabra clave.
+# Return specific text with keyword
+text = my_multiclipboard.get_text ("key2")
+print (text)
 
-**$ python3 main.py "keyword"** # Cargar un portapapeles guardado.
+# Copy to clipboard specific text with keyword
+my_multiclipboard.copy_text ("key4")
 
-**$ python3 main.py list** # Mostrar la lista de palabras clave.
+# Delete specific keywords and the keyword text
+my_multiclipboard.delete_keyword (1)
 
-**$ python3 main.py del "keyword"** # Eliminar una palabra clave.
+# Delete all keywords from the file
+my_multiclipboard.delete_all()
 
-**$ python3 main.py del** # Eliminar todas las palabras clave.
+# Print all keywords from the file
+my_multiclipboard.list_keywords()
+
+```
 
