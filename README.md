@@ -1,11 +1,11 @@
 # Multiclipboard
 
-Class to saves and loads pices of text to the clipboard, via a database in a DB file
+Saves and loads pices of text to the clipboard, via a database in a .db file
 
 ## Install
 
 ``` bash
-$ 
+$ pip install multiclipboard
 ```
 
 ## How to use
